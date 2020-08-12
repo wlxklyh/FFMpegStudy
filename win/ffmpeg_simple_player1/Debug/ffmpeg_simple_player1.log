@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+g:\workspace\gitspace\hawkgit\hawkproj\音视频学习\ffmpeg_simple_player\ffmpeg_simple_player1\include\libavutil\common.h(180): warning C4244: “return”: 从“int64_t”转换到“int32_t”，可能丢失数据
+g:\workspace\gitspace\hawkgit\hawkproj\音视频学习\ffmpeg_simple_player\ffmpeg_simple_player1\include\libavutil\common.h(239): warning C4244: “参数”: 从“uint64_t”转换到“uint32_t”，可能丢失数据
+  ffmpeg_simple_player1.cpp
+g:\workspace\gitspace\hawkgit\hawkproj\音视频学习\ffmpeg_simple_player\ffmpeg_simple_player1\ffmpeg_simple_player1.cpp(30): warning C4018: “<”: 有符号/无符号不匹配
+  ffmpeg_simple_player1.vcxproj -> G:\WorkSpace\GitSpace\HawkGit\HawkProj\音视频学习\ffmpeg_simple_player\Debug\ffmpeg_simple_player1.exe
