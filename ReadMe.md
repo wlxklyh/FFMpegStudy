@@ -9,3 +9,8 @@ https://github.com/wlxklyh/FFMpegStudy/blob/master/FFmpeg%20Tutorial.pdf
 
 ## 一、Tutorial1——视频截帧保存
 https://github.com/wlxklyh/FFMpegStudy/blob/master/win/Tutorial1
+
+
+## 附
+
+
