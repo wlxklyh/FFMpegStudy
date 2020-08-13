@@ -1,21 +1,21 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <fstream>
 
 
 void SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
-	FILE *pFile;		//ÎÄ¼şÖ¸Õë
-	char szFilename[32];//ÎÄ¼şÃû£¨×Ö·û´®£©
+	FILE *pFile;		//æ–‡ä»¶æŒ‡é’ˆ
+	char szFilename[32];//æ–‡ä»¶åï¼ˆå­—ç¬¦ä¸²ï¼‰
 	int y;				//
 
-	sprintf(szFilename, "frame%04d.ppm", iFrame);	//Éú³ÉÎÄ¼şÃû
-	pFile = fopen(szFilename, "wb");			//´ò¿ªÎÄ¼ş£¬Ö»Ğ´Èë
+	sprintf(szFilename, "frame%04d.ppm", iFrame);	//ç”Ÿæˆæ–‡ä»¶å
+	pFile = fopen(szFilename, "wb");			//æ‰“å¼€æ–‡ä»¶ï¼Œåªå†™å…¥
 	if (pFile == NULL) {
 		return;
 	}
 
 	//getch();
 
-	fprintf(pFile, "P6\n%d %d\n255\n", width, height);//ÔÚÎÄµµÖĞ¼ÓÈë£¬±ØĞë¼ÓÈë£¬²»È»PPMÎÄ¼şÎŞ·¨¶ÁÈ¡
+	fprintf(pFile, "P6\n%d %d\n255\n", width, height);//åœ¨æ–‡æ¡£ä¸­åŠ å…¥ï¼Œå¿…é¡»åŠ å…¥ï¼Œä¸ç„¶PPMæ–‡ä»¶æ— æ³•è¯»å–
 
 	for (y = 0; y < height; y++) {
 		fwrite(pFrame->data[0] + y * pFrame->linesize[0], 1, width * 3, pFile);
@@ -31,25 +31,25 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	char filepath[] = "nwn.mp4";
 
-	//(1)ÕâÀï×¢²áÁËËùÓĞµÄÎÄ¼ş¸ñÊ½ºÍ±à½âÂëÆ÷µÄ¿â ËùÒÔËûÃÇ½«±»×Ô¶¯µÄÊ¹ÓÃÔÚ±»´ò¿ªµÄºÏÊÊ¸ñÊ½µÄÎÄ¼ş  Ö»ĞèÒª×¢²áÒ»´Î
+	//(1)è¿™é‡Œæ³¨å†Œäº†æ‰€æœ‰çš„æ–‡ä»¶æ ¼å¼å’Œç¼–è§£ç å™¨çš„åº“ æ‰€ä»¥ä»–ä»¬å°†è¢«è‡ªåŠ¨çš„ä½¿ç”¨åœ¨è¢«æ‰“å¼€çš„åˆé€‚æ ¼å¼çš„æ–‡ä»¶  åªéœ€è¦æ³¨å†Œä¸€æ¬¡
 	av_register_all();
 	avformat_network_init();
 	AVFormatContext *pFormatCtx;
 	pFormatCtx = avformat_alloc_context();
 
-	//(2)´ò¿ªÒ»¸öÎÄ¼ş
+	//(2)æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	if (avformat_open_input(&pFormatCtx, filepath, NULL, NULL) != 0) 
 	{
 		return -1;
 	}
 
-	//(3)¼ì²éÔÚÎÄ¼şÖĞµÄÁ÷µÄĞÅÏ¢
+	//(3)æ£€æŸ¥åœ¨æ–‡ä»¶ä¸­çš„æµçš„ä¿¡æ¯
 	if(avformat_find_stream_info(pFormatCtx,0)<0)
 	{
 		return -1;
 	}
 
-	//(4)dumpÏÂĞÅÏ¢
+	//(4)dumpä¸‹ä¿¡æ¯
 	av_dump_format(pFormatCtx,0, filepath,0);
 
 
@@ -57,7 +57,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	AVCodecContext *pCodecCtx;
 
 	int videoStream = -1;
-	//pFormatCtx->Streams ½ö½öÊÇÒ»×épFormatCtx->nb_streams µÄÖ¸Õë
+	//pFormatCtx->Streams ä»…ä»…æ˜¯ä¸€ç»„pFormatCtx->nb_streams çš„æŒ‡é’ˆ
 	for(i=0; i<pFormatCtx->nb_streams;i++)
 	{
 		if(pFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
@@ -69,7 +69,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	if(videoStream == -1)
 	{
-		return -1;
+		return -1; 
 	}
 
 	pCodecCtx = pFormatCtx->streams[videoStream]->codec;
@@ -104,7 +104,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	buffer = (uint8_t*)av_malloc(numBytes * sizeof(uint8_t));
 
-	//Êı¾İÊÇÉÏÏÂÎÄÀ´µÄÂğ
+	//æ•°æ®æ˜¯ä¸Šä¸‹æ–‡æ¥çš„å—
 	avpicture_fill((AVPicture*)pFrameRGB, buffer, PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
 
 
@@ -118,7 +118,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			avcodec_decode_video2(pCodecCtx,pFrame,&frameFinished,&packet);
 			if(frameFinished)
 			{
-				//¾É°æ±¾
+				//æ—§ç‰ˆæœ¬
 				//img_convert((AVPicture *)pFrameRGB, PIX_FMT_RGB24,(AVPicture*)pFrame, pCodecCtx->pix_fmt,pCodecCtx->width, pCodecCtx->height);
 
 				SwsContext *img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, pCodecCtx->width, pCodecCtx->height, PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
