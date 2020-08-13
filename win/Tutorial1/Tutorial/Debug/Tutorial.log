@@ -1,11 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(ffmpeg_simple_player1.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  stdafx.cpp
-g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\include\libavutil\common.h(180): warning C4244: “return”: 从“int64_t”转换到“int32_t”，可能丢失数据
-g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\include\libavutil\common.h(239): warning C4244: “参数”: 从“uint64_t”转换到“uint32_t”，可能丢失数据
   Tutorial.cpp
 g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(10): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1774): note: 参见“sprintf”的声明
 g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: 参见“fopen”的声明
-g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(61): warning C4018: “<”: 有符号/无符号不匹配
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(59): warning C4018: “<”: 有符号/无符号不匹配
   Tutorial.vcxproj -> G:\WorkSpace\GitSpace\HawkGit\HawkProj\FFMpegStudy\win\Tutorial1\Debug\Tutorial.exe

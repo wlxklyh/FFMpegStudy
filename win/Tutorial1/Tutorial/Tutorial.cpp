@@ -28,7 +28,7 @@ void SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-
+	//文件名字 
 	char filepath[] = "nwn.mp4";
 
 	//(1)这里注册了所有的文件格式和编解码器的库 所以他们将被自动的使用在被打开的合适格式的文件  只需要注册一次
@@ -37,7 +37,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	AVFormatContext *pFormatCtx;
 	pFormatCtx = avformat_alloc_context();
 
-	//(2)打开一个文件
+	//(2)打开一个文件 打开之后pFormatCtx就有有了文件句柄  这个会打开文件且读取Header
 	if (avformat_open_input(&pFormatCtx, filepath, NULL, NULL) != 0) 
 	{
 		return -1;
@@ -53,12 +53,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	av_dump_format(pFormatCtx,0, filepath,0);
 
 
-	int i;
 	AVCodecContext *pCodecCtx;
-
 	int videoStream = -1;
-	//pFormatCtx->Streams 仅仅是一组pFormatCtx->nb_streams 的指针
-	for(i=0; i<pFormatCtx->nb_streams;i++)
+	//pFormatCtx->Streams 仅仅是一组pFormatCtx->nb_streams 的指针 包含了哪些流
+	for(int i=0; i<pFormatCtx->nb_streams;i++)
 	{
 		if(pFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
 		{
@@ -104,27 +102,31 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	buffer = (uint8_t*)av_malloc(numBytes * sizeof(uint8_t));
 
-	//数据是上下文来的吗
+	//数据是从buffer来的  这里相当于是pFrameRGB初始化数据 可能是个黑色的图片
 	avpicture_fill((AVPicture*)pFrameRGB, buffer, PIX_FMT_RGB24, pCodecCtx->width, pCodecCtx->height);
 
 
 	int frameFinished;
 	AVPacket packet;
-	i = 0;
+	int i = 0;
+	//（5）循环从Steams中 读取出frame packet通常包含一个压缩的Frame 音频则可能是多个Frame
 	while(av_read_frame(pFormatCtx,&packet)>=0)
 	{
+		//stream_index Packet所在stream的index 通过这个来判断是不是视频帧
 		if(packet.stream_index == videoStream)
 		{
+			//把视频帧解压到Frame中
 			avcodec_decode_video2(pCodecCtx,pFrame,&frameFinished,&packet);
 			if(frameFinished)
 			{
 				//旧版本
 				//img_convert((AVPicture *)pFrameRGB, PIX_FMT_RGB24,(AVPicture*)pFrame, pCodecCtx->pix_fmt,pCodecCtx->width, pCodecCtx->height);
-
+				//转换参数 
 				SwsContext *img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, pCodecCtx->width, pCodecCtx->height, PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
+				//转换
 				sws_scale(img_convert_ctx, (const uint8_t* const*)pFrame->data, pFrame->linesize, 0, pCodecCtx->height, pFrameRGB->data, pFrameRGB->linesize);
-
-				if(++i <=5)
+				++i;
+				if( i%120 == 1)
 				{
 					SaveFrame(pFrameRGB, pCodecCtx->width, pCodecCtx->height, i);
 				}
