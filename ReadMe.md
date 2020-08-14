@@ -38,6 +38,25 @@ pFormatCtx->stream[i]->codec->codec_type == ACMEIDIA_TYPE_VIDEO
     fwrite(frame->data[0]+pFrame->linesize[0],1,width*3,pFile)
 
 ## 二、Tutorial2——视频显示到屏幕（SDL）
+跟Tutorial1大致一致 除了SDL部分 和 Frame编码为YUV
+1. SDL部分
+```cpp
+SDL_Init//SDL初始化
+SDL_Surface* screen = SDL_SetVideoMode//初始化一个屏幕
+SDL_Overlay* bmp = SDL_CreateYUVOverlay//有点像Screen上面的一个View
+//YUVOverlay  赋值
+SDL_LockYUVOverlay 
+bmp->pixels[0] = nowYUVAVFrame->data[0];
+...
+bmp->pitches[0] = nowYUVAVFrame->linesize[0];
+...
+//显示
+SDL_DisplayYUVOverlay
+```
+2. Frame编码为YUV
+注意Frame的初始化 格式是PIX_FMT_YUV420P
+avpicture_get_size(PIX_FMT_YUV420P, avcodecContext->width, avcodecContext->height);
+sws_scale 转换的时候格式是PIX_FMT_YUV420P
 
 ## 附
 后面学习FFMpeg（win）都从[这里](https://github.com/wlxklyh/FFMpegStudy/blob/master/win/BackUp/HelloWorld)拷贝出来  不用管环境和头文件的问题。
