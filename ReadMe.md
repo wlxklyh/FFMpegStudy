@@ -38,6 +38,7 @@ pFormatCtx->stream[i]->codec->codec_type == ACMEIDIA_TYPE_VIDEO
     fwrite(frame->data[0]+pFrame->linesize[0],1,width*3,pFile)
 
 ## 二、Tutorial2——视频显示到屏幕（SDL）
+![播放视频](Img/playvedio.gif)
 跟Tutorial1大致一致 除了SDL部分 和 Frame编码为YUV
 1. SDL部分
 ```cpp
