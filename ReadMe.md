@@ -38,6 +38,7 @@ pFormatCtx->stream[i]->codec->codec_type == ACMEIDIA_TYPE_VIDEO
     fwrite(frame->data[0]+pFrame->linesize[0],1,width*3,pFile)
 
 ## 二、Tutorial2——视频显示到屏幕（SDL）
+https://github.com/wlxklyh/FFMpegStudy/blob/master/win/Tutorial2
 ![播放视频](Img/playvedio.gif)
 跟Tutorial1大致一致 除了SDL部分 和 Frame编码为YUV
 1. SDL部分
@@ -58,6 +59,21 @@ SDL_DisplayYUVOverlay
 注意Frame的初始化 格式是PIX_FMT_YUV420P
 avpicture_get_size(PIX_FMT_YUV420P, avcodecContext->width, avcodecContext->height);
 sws_scale 转换的时候格式是PIX_FMT_YUV420P
+
+## 三、Tutorial3——播放音频
+现在我们要来播放音频。SDL 也为我们准备了输出音频的方法。函数SDL_OpenAudio() 本身就是用来打开音
+频设备的。它使用一个叫做SDL_AudioSpec 结构体作为参数，这个结构体中包含了我们将要输出的音频的所有信
+息。
+在我们展示如何建立之前，让我们先解释一下电脑是如何处理音频的。数字音频是由一长串的样本
+（samples）流组成的。每个样本表示音频波形中的一个值。音频按照一个特定的采样率sample rate 来进行录制，
+采样率表示以多快的速度来播放这段样本流，它的表示方式为每秒多少次采样。例如22050 和44100 的采样率就
+是电台和CD 常用的采样率。此外，大多音频有不只一个通道来表示立体声或者环绕。例如，如果采样是立体声，
+那么每次的采样数就为2 个。当我们从一个电影文件中得到数据的时候，我们不知道我们将得到多少个样本，但
+是ffmpeg 将不会给我们部分的样本——这意味着它将不会把立体声分割开来。
+SDL 播放音频的方式是这样的：你先设置音频的选项：采样率（在SDL 的结构体中叫做“freq”，代指
+frequency），通道数和其它的参数，然后我们设置一个回调函数和一些用户数据（userdata）。当开始播放音频的
+时候，SDL 将不断地调用这个回调函数并且要求它来向音频缓冲填入特定的数量的字节。当我们把这些信息放到
+
 
 ## 附
 后面学习FFMpeg（win）都从[这里](https://github.com/wlxklyh/FFMpegStudy/blob/master/win/BackUp/HelloWorld)拷贝出来  不用管环境和头文件的问题。
