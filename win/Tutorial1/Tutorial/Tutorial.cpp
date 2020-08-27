@@ -2,27 +2,30 @@
 #include <fstream>
 
 
-void SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
-	FILE *pFile;		//文件指针
-	char szFilename[32];//文件名（字符串）
-	int y;				//
+//将 AVFrame 保存成图片文件  ppm格式
+void SaveFrame(AVFrame* pFrame, int width, int height, int iFrame)
+{
+	//（1）文件名
+	char szFileName[32];
+	sprintf(szFileName, "frame%04d.ppm", iFrame);
 
-	sprintf(szFilename, "frame%04d.ppm", iFrame);	//生成文件名
-	pFile = fopen(szFilename, "wb");			//打开文件，只写入
-	if (pFile == NULL) {
+
+	//（2）打开文件
+	FILE *pFile;
+	pFile = fopen(szFileName, "wb");
+	if (pFile == NULL)
+	{
 		return;
 	}
 
-	//getch();
+	//（3）写入ppm文件的文件头 
+	fprintf(pFile, "P6\n%d %d\n255\n", width, height);
 
-	fprintf(pFile, "P6\n%d %d\n255\n", width, height);//在文档中加入，必须加入，不然PPM文件无法读取
-
-	for (y = 0; y < height; y++) {
-		fwrite(pFrame->data[0] + y * pFrame->linesize[0], 1, width * 3, pFile);
+	//（4）写入ppm文件的内容
+	for (int i = 0; i < height; i++)
+	{
+		fwrite(pFrame->data[0] + i * pFrame->linesize[0], 1, width * 3, pFile);
 	}
-
-	fclose(pFile);
-
 }
 
 

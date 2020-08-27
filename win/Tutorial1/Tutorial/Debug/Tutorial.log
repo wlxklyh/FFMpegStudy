@@ -2,7 +2,8 @@
   Tutorial.cpp
 g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(10): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1774): note: 参见“sprintf”的声明
-g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(15): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: 参见“fopen”的声明
-g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(59): warning C4018: “<”: 有符号/无符号不匹配
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial1\tutorial\tutorial.cpp(62): warning C4018: “<”: 有符号/无符号不匹配
+  LINK : 没有找到 G:\WorkSpace\GitSpace\HawkGit\HawkProj\FFMpegStudy\win\Tutorial1\Debug\Tutorial.exe 或上一个增量链接没有生成它；正在执行完全链接
   Tutorial.vcxproj -> G:\WorkSpace\GitSpace\HawkGit\HawkProj\FFMpegStudy\win\Tutorial1\Debug\Tutorial.exe
