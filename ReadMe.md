@@ -78,6 +78,7 @@ sws_scale 转换的时候格式是PIX_FMT_YUV420P
     4.  赋值SDL_Overlay
     5.  显示SDL_DisplayYUVOverlay
 ## 三、Tutorial3——播放音频
+https://github.com/wlxklyh/FFMpegStudy/blob/master/win/Tutorial3
 播放视频的代码请看Tutorial2这里只说播放音频的
  
 跟播放视频不一样的地方：
@@ -103,6 +104,9 @@ sws_scale 转换的时候格式是PIX_FMT_YUV420P
       4. 根据buff大小：Frame->data 取出来
    2. 往音频线程的 stream赋值  
 
+## 四、Tutorial4、5、6、7——创建线程、同步视频、同步音频、快进
+先看着代码：
+https://github.com/wlxklyh/FFMpegStudy/blob/master/win/Tutorial456
 ## 附
 后面学习FFMpeg（win）都从[这里](https://github.com/wlxklyh/FFMpegStudy/blob/master/win/BackUp/HelloWorld)拷贝出来  不用管环境和头文件的问题。
 

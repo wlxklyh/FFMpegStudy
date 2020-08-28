@@ -1,0 +1,17 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(ffmpeg_simple_player1.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Tutorial.cpp
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(222): warning C4101: “nb_samples”: 未引用的局部变量
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(423): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(411): warning C4101: “pict”: 未引用的局部变量
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(414): warning C4101: “i”: 未引用的局部变量
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(691): warning C4244: “=”: 从“uint64_t”转换到“double”，可能丢失数据
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(694): warning C4244: “=”: 从“int64_t”转换到“double”，可能丢失数据
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(668): warning C4101: “len1”: 未引用的局部变量
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(720): warning C4018: “>=”: 有符号/无符号不匹配
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(828): warning C4018: “<”: 有符号/无符号不匹配
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(1002): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(962): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: 参见“strcpy”的声明
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(938): warning C4101: “pts”: 未引用的局部变量
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial4\tutorial\tutorial.cpp(785): warning C4715: “stream_component_open”: 不是所有的控件路径都返回值
+  Tutorial.vcxproj -> G:\WorkSpace\GitSpace\HawkGit\HawkProj\FFMpegStudy\win\Tutorial4\Debug\Tutorial.exe
