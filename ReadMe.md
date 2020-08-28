@@ -1,3 +1,4 @@
+![](Img/ffmpeg.png)
 ## FFmpeg入门
 
 测试视频：
