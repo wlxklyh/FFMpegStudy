@@ -110,6 +110,6 @@ https://github.com/wlxklyh/FFMpegStudy/blob/master/win/Tutorial456
 ## 附
 后面学习FFMpeg（win）都从[这里](https://github.com/wlxklyh/FFMpegStudy/blob/master/win/BackUp/HelloWorld)拷贝出来  不用管环境和头文件的问题。
 
-**欢迎加微信讨论**
-![](Img/2020-08-28-14-03-58.png)
+**欢迎加微信讨论（备注Gituhb）**
+![](Img/2020-08-28-14-03-04.png)
 
