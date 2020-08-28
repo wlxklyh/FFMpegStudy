@@ -96,7 +96,8 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (frameFinished)
 			{
 				//转换参数 
-				SwsContext *img_convert_ctx = sws_getContext(avcodecContext->width, avcodecContext->height, avcodecContext->pix_fmt, avcodecContext->width, avcodecContext->height, PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
+				SwsContext *img_convert_ctx = sws_getContext(avcodecContext->width, avcodecContext->height, avcodecContext->pix_fmt, avcodecContext->width, avcodecContext->height, 
+					PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
 				//转换
 				sws_scale(img_convert_ctx, (const uint8_t* const*)nowAVFrame->data, nowAVFrame->linesize, 0, avcodecContext->height, nowYUVAVFrame->data, nowYUVAVFrame->linesize);
 
