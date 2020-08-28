@@ -86,6 +86,23 @@ sws_scale 转换的时候格式是PIX_FMT_YUV420P
 3. 主线程解码音频的过程跟解码视频的类似 逐帧解码后塞入队列packet_queue_put
 4. 回调是异步线程需要取队列packet_queue_get 然后
 
+音频解码流程：
+
+1. 查找音频流 
+2. 得到音频流解码器上下文
+3. 得到音频解码器
+4. 打开音频解码器
+5. 帧初始化
+6. 逐帧得到音频的packet 
+7. 把音频packet塞入队列
+8. 回调函数audio_callback
+   1. 取出一帧的数据：audio_decode_frame
+      1. 从队列里面取出一个：packetpacket_queue_get 
+      2. 音频解码：avcodec_decode_audio4
+      3. 获取音频buff大小：av_samples_get_buffer_size
+      4. 根据buff大小：Frame->data 取出来
+   2. 往音频线程的 stream赋值  
+
 ## 附
 后面学习FFMpeg（win）都从[这里](https://github.com/wlxklyh/FFMpegStudy/blob/master/win/BackUp/HelloWorld)拷贝出来  不用管环境和头文件的问题。
 

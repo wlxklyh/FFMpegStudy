@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(ffmpeg_simple_player1.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Tutorial.cpp
+g:\workspace\gitspace\hawkgit\hawkproj\ffmpegstudy\win\tutorial2\tutorial\tutorial.cpp(31): warning C4018: “<”: 有符号/无符号不匹配
+  Tutorial.vcxproj -> G:\WorkSpace\GitSpace\HawkGit\HawkProj\FFMpegStudy\win\Tutorial2\Debug\Tutorial.exe

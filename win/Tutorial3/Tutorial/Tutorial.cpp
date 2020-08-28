@@ -93,49 +93,46 @@ int packet_queue_put(PacketQueue* q, AVPacket*pkt)
 }
 
 //从packet队列解码出数据塞到audio_buf中
-int audio_decode_frame(AVCodecContext *aCodecCtx, uint8_t *audio_buf, int buf_size) {
-	static AVFrame *decoded_aframe;
+int audio_decode_frame(AVCodecContext *pAudioCodecCtx, uint8_t *audio_buf, int buf_size) 
+{
+	static AVFrame *decodedAudioFrame = avcodec_alloc_frame();
+	if(decodedAudioFrame == NULL)
+	{
+		exit(1);
+	}
+
 	static AVPacket pkt, pktTemp;
-
-
 	int len1, data_size;
 
 	while(true) 
 	{
+		//如果取出的数据大于0
 		while (pktTemp.size > 0)
 		{
-			int got_frame = 0;
-
-			if (!decoded_aframe) {
-				if (!(decoded_aframe = avcodec_alloc_frame())) {
-					fprintf(stderr, "out of memory\n");
-					exit(1);
-				}
-			}
-			else
-				avcodec_get_frame_defaults(decoded_aframe);
-
-			//data_size = buf_size; /// ????
-			len1 = avcodec_decode_audio4(aCodecCtx, decoded_aframe, &got_frame, &pktTemp);
+			//默认帧
+			avcodec_get_frame_defaults(decodedAudioFrame);
+			
+			int hasGotFrame = 0;
+			//音频解码 返回长度
+			len1 = avcodec_decode_audio4(pAudioCodecCtx, decodedAudioFrame, &hasGotFrame, &pktTemp);
 
 
-			/// Check if 
+			//检查是否有编码
 			if (len1 < 0) {
 				pktTemp.size = 0;
 				break; // skip packet
 			}
 
-
-			if (got_frame) {
+			if (hasGotFrame) {
 				printf("\nGot frame!");
-				//printf("\nFrame data size: %d", sizeof(decoded_aframe->data[0]));
-				data_size = av_samples_get_buffer_size(NULL, aCodecCtx->channels,
-					decoded_aframe->nb_samples,
-					aCodecCtx->sample_fmt, 1);
+
+				data_size = av_samples_get_buffer_size(NULL, pAudioCodecCtx->channels,
+					decodedAudioFrame->nb_samples,
+					pAudioCodecCtx->sample_fmt, 1);
 				if (data_size > buf_size) {
 					data_size = buf_size;
 				}
-				memcpy(audio_buf, decoded_aframe->data[0], data_size);
+				memcpy(audio_buf, decodedAudioFrame->data[0], data_size);
 
 			}
 			else {
@@ -151,24 +148,6 @@ int audio_decode_frame(AVCodecContext *aCodecCtx, uint8_t *audio_buf, int buf_si
 			}
 
 			return data_size;
-			/* Deprecated
-						data_size = buf_size;
-						len1 = avcodec_decode_audio2(aCodecCtx, (int16_t *)audio_buf, &data_size,
-													 audio_pkt_data, audio_pkt_size);
-						if(len1 < 0) {
-							// if error, skip frame
-							audio_pkt_size = 0;
-							break;
-						}
-						audio_pkt_data += len1;
-						audio_pkt_size -= len1;
-						if(data_size <= 0) {
-							// No data yet, get more frames
-							continue;
-						}
-						// We have data, return it and come back for more later
-						return data_size;
-			*/
 		}
 
 
@@ -198,7 +177,7 @@ int audio_decode_frame(AVCodecContext *aCodecCtx, uint8_t *audio_buf, int buf_si
 void audio_callback(void *userdata, Uint8 *stream, int len) {
 
 	//回调传入的解码器上下文
-	AVCodecContext *aCodecCtx = (AVCodecContext *)userdata;
+	AVCodecContext *pAudioCodecCtx = (AVCodecContext *)userdata;
 	int len1, audio_size;
 
 	static uint8_t audio_buf[(AVCODEC_MAX_AUDIO_FRAME_SIZE * 3) / 2];
@@ -209,7 +188,7 @@ void audio_callback(void *userdata, Uint8 *stream, int len) {
 		/// audio
 		if (audio_buf_index >= audio_buf_size) {
 			//从队列里面读取出解码后的音频数据
-			audio_size = audio_decode_frame(aCodecCtx, audio_buf, sizeof(audio_buf));
+			audio_size = audio_decode_frame(pAudioCodecCtx, audio_buf, sizeof(audio_buf));
 			if (audio_size < 0) {
 				/* If error, output silence */
 				audio_buf_size = 1024; // arbitrary?
